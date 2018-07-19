@@ -1,4 +1,6 @@
 import java.util.*;
+import com.github.packageurl.PackageURL;
+import com.github.packageurl.MalformedPackageURLException;
 
 /*
 Generates a simple Purl (Package URL) for dependency-track 
@@ -19,7 +21,9 @@ class PurlGenerator {
 		handlePackageType();
 		handlePackageName();
 		handlePackageVersion();
-		generatePurl();	}
+		generatePurl();
+		verifyPurl(purlBuilder.toString());
+	}
 
 	//Package Type Functions
 
@@ -138,6 +142,7 @@ class PurlGenerator {
 	private final String VERSION_DELIMETER = "@";
 
 	private void generatePurl() {
+		purlBuilder = new StringBuilder();
 		switch (myPackage.getPackageType()) {
 			case MAVEN:
 				generateMavenPurl();
@@ -183,7 +188,7 @@ class PurlGenerator {
 	private void generateGemPurl() {
 		purlBuilder.append(SCHEME);
 		purlBuilder.append(SCHEME_DELIMETER);
-		purlBuilder.append(NPM);
+		purlBuilder.append(GEM);
 		purlBuilder.append(TYPE_DELIMETER);
 		purlBuilder.append(myPackage.getPackageName());
 		purlBuilder.append(VERSION_DELIMETER);
@@ -202,6 +207,14 @@ class PurlGenerator {
 		System.out.println("************Debugging**************");
 		System.out.println(myPackage.getPackageType());
 		System.out.println(myPackage.getPackageName());
+	}
+
+	private void verifyPurl(String purl) {
+		try {
+			PackageURL packageUrl = new PackageURL(purl);
+		} catch (MalformedPackageURLException mpe) {
+			System.out.println("Invalid inputs!");
+		}
 	}
 }
 
