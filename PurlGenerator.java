@@ -22,7 +22,7 @@ class PurlGenerator {
 		handlePackageName();
 		handlePackageVersion();
 		generatePurl();
-		verifyPurl(purlBuilder.toString());
+		//verifyPurl(purlBuilder.toString());
 	}
 
 	//Package Type Functions
@@ -209,6 +209,7 @@ class PurlGenerator {
 		System.out.println(myPackage.getPackageName());
 	}
 
+	/*
 	private void verifyPurl(String purl) {
 		try {
 			PackageURL packageUrl = new PackageURL(purl);
@@ -216,6 +217,7 @@ class PurlGenerator {
 			System.out.println("Invalid inputs!");
 		}
 	}
+	*/
 }
 
 class Package {

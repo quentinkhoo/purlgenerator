@@ -54,10 +54,6 @@ public final class PackageURL implements Serializable {
     private static final long serialVersionUID = 3243226021636427586L;
     private static final Pattern TYPE_PATTERN = Pattern.compile("^[a-zA-Z][a-zA-Z0-9.+-]+$");
 
-    public static void main(String[] args) {
-        PackageURL pu = new PackageURL("pkg:gem/loofah@2.2.0");
-    }
-
     /**
      * Constructs a new PackageURL object by parsing the specified string.
      * @param purl a valid package URL string to parse
